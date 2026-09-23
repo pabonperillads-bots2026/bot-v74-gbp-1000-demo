@@ -1,27 +1,27 @@
-# BOT V7.4 - 1000 GBP DEMO - DANNY - Salome_Manuela_0122 - TODO EN GBP
+# BOT V7.4 - 1000 GBP DEMO - DANNY - Salomé_Manuela_0122 - TODO EN GBP
 import os, time, hmac, hashlib, requests
 from datetime import datetime
 
 print("=== BOT V7.4 DANNY - TODO EN GBP - 1000.00 DEMO ===")
 
-API_KEY = os.getenv("BINANCE_API_KEY")
-SECRET = os.getenv("BINANCE_SECRET")
+MT5_LOGIN = os.getenv("MT5_LOGIN")
+MT5_PASSWORD = os.getenv("MT5_PASSWORD")
+MT5_SERVER = os.getenv("MT5_SERVER")
 
 # CONFIG TODO EN GBP DANNY
 CAPITAL_GBP = 1000.00
-PEPPERSTONE_GBP = 61601283
 VPS = "Frankfurt"
-SYMBOL = "GBPUSDT"
+SIMBOLO = "GBPUSD"
 
-def log_gbp(msg):
-    print(f"[{datetime.now().strftime('%H:%M:%S')} GBP] {msg}")
+def log_gbp(MSG):
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] GBP | {MSG}")
 
-log_gbp(f"Capital: {CAPITAL_GBP} GBP | Pepperstone: {PEPPERSTONE_GBP} | VPS: {VPS}")
-log_gbp(f"API Blindada: {'OK' if API_KEY else 'FALTA SECRETO'} - DANNY")
+log_gbp(f"Capital: {CAPITAL_GBP} GBP | GoMarkets: {MT5_LOGIN} | VPS: {VPS}")
 
-if API_KEY and SECRET:
+if MT5_LOGIN and MT5_PASSWORD and MT5_SERVER:
+    log_gbp(f"API Blindada: OK - {MT5_LOGIN} {MT5_SERVER}")
     log_gbp("Blindaje OK - Listo para operar TODO EN GBP, DANNY")
-    # Aqui va tu logica V7.4
-    log_gbp("BOT V7.4 DEMO ACTIVO - Esperando senal GBP - DANNY")
+    log_gbp("BOT V7.4 DEMO ACTIVO - Esperando señal GBP - DANNY - Gráfica GBPUSD")
 else:
+    log_gbp(f"API Blindada: FALTA SECRETO - DANNY - LOGIN:{'Vale' if MT5_LOGIN else 'FALTA'} PASS:{'Vale' if MT5_PASSWORD else 'FALTA'} SERVER:{'Vale' if MT5_SERVER else 'FALTA'}")
     log_gbp("ERROR: Secrets no cargados - Revisa Escenarios > Secretos")
