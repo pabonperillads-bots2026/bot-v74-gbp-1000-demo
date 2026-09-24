@@ -1,6 +1,7 @@
 # BOT V7.4.1 - 1000 GBP DEMO - DANNY - Salomé_Manuela_0122 - TODO EN GBP
 import os, time, csv
 from datetime import datetime
+from lot_calculator import calcular_lote_pro
 
 print("=== BOT V7.4 DANNY - TODO EN GBP - 1000.00 DEMO ===")
 
@@ -12,11 +13,12 @@ MT5_SERVER = os.getenv("MT5_SERVER")
 CAPITAL_GBP = 1000.00
 VPS = "Frankfurt"
 SIMBOLO = "GBPUSD"
+lote_pro = calcular_lote_pro(CAPITAL_GBP, riesgo_pct=1.0, sl_pips=30)
 
 def log_gbp(MSG):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] GBP | {MSG}")
 
-log_gbp(f"Capital: {CAPITAL_GBP} GBP | GoMarkets: {MT5_LOGIN} | VPS: {VPS}")
+log_gbp(f"Capital: {CAPITAL_GBP} GBP | Lote PRO: {lote_pro} | GoMarkets: {MT5_LOGIN} | VPS: {VPS}")
 
 if MT5_LOGIN and MT5_PASSWORD and MT5_SERVER:
     log_gbp(f"API Blindada OK - {MT5_SERVER}")
