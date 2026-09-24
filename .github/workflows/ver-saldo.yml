@@ -1,0 +1,18 @@
+name: VER SALDO 1000 GBP PRO
+on:
+  workflow_dispatch:
+jobs:
+  saldo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install MetaTrader5 pandas pytz 2>/dev/null || pip install pandas pytz
+      - name: Ver Saldo Real Frankfurt
+        env:
+          MT5_LOGIN: ${{ secrets.MT5_LOGIN }}
+          MT5_PASSWORD: ${{ secrets.MT5_PASSWORD }}
+          MT5_SERVER: ${{ secrets.MT5_SERVER }}
+        run: python ver_saldo_gbp.py
