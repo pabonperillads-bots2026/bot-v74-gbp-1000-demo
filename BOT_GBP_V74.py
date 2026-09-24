@@ -2,8 +2,9 @@
 import os, time, csv
 from datetime import datetime
 from lot_calculator import calcular_lote_pro
+from telegram_alerts import enviar_telegram
 
-print("=== BOT V7.4 DANNY - TODO EN GBP - 1000.00 DEMO ===")
+print("*** BOT V7.4 DANNY - TODO EN GBP - 1000.00 DEMO ===")
 
 MT5_LOGIN = os.getenv("MT5_LOGIN")
 MT5_PASSWORD = os.getenv("MT5_PASSWORD")
@@ -24,15 +25,17 @@ def log_gbp(MSG):
 log_gbp(f"Capital: {CAPITAL_GBP} GBP | Lote PRO: {lote_pro} | GoMarkets: {MT5_LOGIN} | VPS: {VPS}")
 
 if MT5_LOGIN and MT5_PASSWORD and MT5_SERVER and puede:
-    log_gbp(f"API Blindada OK - {MT5_SERVER}")
+    log_gbp(f"API Blindada {CAPITAL_GBP} OK - {MT5_SERVER}")
     log_gbp("Blindaje OK - Listo para operar TODO EN GBP, DANNY")
     log_gbp("BOT V7.4 DEMO ACTIVO - Esperando señal GBP - DANNY - Gráfica GBPUSD")
-    
+    enviar_telegram(f"🚀 BOT V7.4 DANNY ACTIVO - {CAPITAL_GBP} GBP - Lote: {lote_pro} - VPS: {VPS} - GoMarkets: {MT5_LOGIN} - Listo GBPUSD")
+
     # --- NUEVO AUTO-APRENDIZAJE V7.4.1 ---
     with open("operaciones_gbp_1000_demo.csv", "a", newline="") as f:
         csv.writer(f).writerow([datetime.utcnow().isoformat(), MT5_LOGIN, MT5_SERVER, f"{CAPITAL_GBP} GBP", "OK", "V7.4.1"])
     log_gbp("Auto-learn CSV guardado -> operaciones_gbp_1000_demo.csv")
-    
+
 else:
     log_gbp(f"API Blindada: FALTA SECRETO - LOGIN:{'Vale' if MT5_LOGIN else 'FALTA'}")
     log_gbp("ERROR: Secrets no cargados - Revisa Escenarios > Secretos")
+    enviar_telegram("❌ BOT V7.4 ERROR - FALTA SECRETO MT5 - Revisa GitHub Secrets DANNY")
