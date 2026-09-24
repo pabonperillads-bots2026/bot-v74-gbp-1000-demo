@@ -1,21 +1,20 @@
 name: BOT GBP V74 MT5
-
 on:
-  schedule:
-    - cron: '0 * * * 1-5'
   workflow_dispatch:
-
+  schedule:
+    - cron: '*/15 * * * *'
 jobs:
   bot:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - run: pip install MetaTrader5 requests pandas
-      - run: python BOT_GBP_V74.py
+      - run: pip install pandas pytz
+      - name: Ejecutar BOT
         env:
           MT5_LOGIN: ${{ secrets.MT5_LOGIN }}
           MT5_PASSWORD: ${{ secrets.MT5_PASSWORD }}
           MT5_SERVER: ${{ secrets.MT5_SERVER }}
+        run: python BOT_GBP_V74.py
